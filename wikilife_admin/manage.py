@@ -1,9 +1,9 @@
 # coding=utf-8
 
-import json
 from getopt import getopt, GetoptError
-import sys
+import json
 import os
+import sys
 import tornado.httpserver
 import tornado.ioloop
 
@@ -82,10 +82,10 @@ if __name__ == "__main__":
         display_help()
         sys.exit(0)
 
+    sys.path.append(os.path.abspath(os.path.join(sys.argv[0], "../.."))) #export PYTHONPATH=$PYTHONPATH:$PWD; 
     sys.path.append(os.path.abspath(os.path.join(libs_path, "wikilife_utils")))
     sys.path.append(os.path.abspath(os.path.join(libs_path, "wikilife_data")))
     sys.path.append(os.path.abspath(os.path.join(libs_path, "wikilife_biz")))
-    sys.path.append(os.path.abspath(os.path.join(libs_path, "wikilife_admin")))
     
     from wikilife_utils.settings.settings_loader import SettingsLoader
     settings = SettingsLoader().load_settings(env)
