@@ -34,7 +34,7 @@ def display_server_info(settings):
     print ""
     print "===== SERVER INFO ====="
     print ""
-    print "Server: Wikilife WS (Tornado)"
+    print "Server: Wikilife Admin (Tornado)"
     print "Environment: %s" % settings["ENVIRONMENT"]
     print "Port: %s" % settings["TORNADO"]["port"]
     print "DB_SETTINGS: %s" % json.dumps(settings["DB_SETTINGS"], indent=2)

@@ -2,7 +2,8 @@
 
 from tornado.web import Application
 from wikilife_admin.view.view_handlers import NodeByIdHandler, MainHandler, \
-    MetricByIdHandler, SearchHandler, DescendantsHandler, NodeByOrigIdHandler
+    MetricByIdHandler, SearchHandler, DescendantsHandler, NodeByOrigIdHandler,\
+    ChildrenIDsHandler
 from wikilife_biz.utils.biz_service_builder import BizServiceBuilder
 from wikilife_data.utils.dao_builder import DAOBuilder
 from wikilife_data.utils.db_conn import DBConn
@@ -31,5 +32,6 @@ def setup_app(settings):
     routes.append(('/metrics/(?P<metric_id>\d+)?', MetricByIdHandler, {'services': services}))
     routes.append(('/search/', SearchHandler, {'services': services}))
     routes.append(('/descendants/(?P<node_id>\d+)?', DescendantsHandler, {'services': services}))
+    routes.append(('/childrenids/(?P<node_id>\d+)?', ChildrenIDsHandler, {'services': services}))
 
     return Application(routes, **settings["TORNADO"])

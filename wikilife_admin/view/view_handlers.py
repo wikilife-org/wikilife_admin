@@ -61,3 +61,17 @@ class DescendantsHandler(BaseHandler):
         node = meta_srv.get_node_by_id(node_id)
         node["descendantsCount"] = meta_srv.get_descendants_count(node_id)
         self.render("descendants.html", node=node)
+
+class ChildrenIDsHandler(BaseHandler):
+    def get(self, node_id):
+        children_page_index = int(self.get_argument("children_page", 0))
+        node_id = int(node_id)
+        meta_srv = self._services["meta"]
+        node = meta_srv.get_node_by_id(node_id)
+
+        children_page = meta_srv.get_node_children(node_id, children_page_index, 200)
+        node["children"] = children_page
+        node["children"]["pagePrev"] = "/childrenids/%s?children_page=%s" %(node_id, children_page_index-1) if children_page_index>0 else None
+        node["children"]["pageNext"] = "/childrenids/%s?children_page=%s" %(node_id, children_page_index+1) if children_page_index<children_page["pageCount"]-1 else None
+        
+        self.render("childrenids.html", node=node)
